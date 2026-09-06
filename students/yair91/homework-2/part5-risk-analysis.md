@@ -2,7 +2,7 @@
 
 ## 5.1 Risk Matrix
 
-Ten risks, classified by likelihood and impact. Priority combines both: a low-likelihood risk with critical impact still earns P0 when its consequences are irreversible.
+Ten risks, classified by likelihood and impact. Priority mixes the two: something unlikely still gets P0 if you cannot undo the damage once it happens.
 
 | **Risk**                                                                 | **Likelihood** | **Impact** | **Priority** | **Mitigation Strategy**                                                                                                                                                         |
 | ------------------------------------------------------------------------ | -------------- | ---------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

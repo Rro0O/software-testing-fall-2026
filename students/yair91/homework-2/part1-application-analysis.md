@@ -8,7 +8,7 @@
 
 Aula is a student management system for a mid-sized university. It is the single place where the academic life of a student is recorded: enrollment, schedules, attendance, grades, transcripts and tuition. Students use it to register for courses, follow their schedule, submit assignments and pay tuition. Professors use it to publish materials, record attendance and capture grades. The registrar's office manages the course catalog, opens and closes registration windows, validates prerequisites and issues official transcripts. The finance office reconciles tuition payments and scholarships.
 
-Aula is not a learning platform in the sense of hosting video lectures or interactive content. It is a system of record. Its value comes from being correct and available, not from being entertaining. A wrong grade in a transcript or a registration window that goes down for two hours during peak enrollment causes real damage to real people, and that damage is expensive to undo.
+Aula is not a learning platform in the sense of hosting video lectures or interactive content. It is a system of record. Its value comes from being right and being up, not from being pleasant to use. A wrong grade in a transcript or a registration window that goes down for two hours during peak enrollment causes real damage to real people, and that damage is expensive to undo.
 
 ### Target Users
 
@@ -51,4 +51,4 @@ Not everything in Aula carries the same weight. Four areas are mission-critical:
 3. **Course registration under load.** Registration opens at a fixed hour and thousands of students hit the system in the same few minutes. Capacity limits must be enforced exactly: two students cannot take the last seat in a course.
 4. **Payment processing.** Charging twice, charging the wrong amount, or losing the record of a completed payment all create financial disputes and block a student's registration for the following term.
 
-Everything else — notifications, reporting, the visual polish of the catalog — matters, but a defect there is an inconvenience rather than a crisis. That distinction drives the priorities in the rest of this analysis.
+Everything else — notifications, reporting, how pretty the catalog looks — still matters, but a bug there is annoying, not a crisis. That split is what drives the priorities in the rest of this analysis.

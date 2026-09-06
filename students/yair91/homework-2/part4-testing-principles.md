@@ -7,7 +7,7 @@ The seven principles applied to Aula. Each one is stated, applied to this system
 ## 1. Testing Shows Presence of Defects (Not Absence)
 
 **Application to Aula**:
-A green suite means the defects we thought of are not present. It says nothing about the transfer student whose credits were validated in a different format, or the professor who edits a grade during the exact minute the registrar publishes it. Aula processes thousands of academic paths and no suite enumerates them all.
+A green suite only means the bugs we thought of are not there. It says nothing about the transfer student whose credits were validated in a different format, or the professor who edits a grade during the exact minute the registrar publishes it. Aula processes thousands of academic paths and no suite enumerates them all.
 
 **Impact on Strategy**:
 
@@ -87,7 +87,7 @@ This is not a social network, where a display defect is a bad afternoon. It is a
 ## 7. Absence-of-Errors Fallacy
 
 **Application to Aula**:
-A system with zero known defects that requires three attempts to register for a course, or whose error messages do not explain what to do next, has failed even though every test passes. Correctness is necessary and not sufficient.
+A system with zero known defects that requires three attempts to register for a course, or whose error messages do not explain what to do next, has failed even though every test passes. Being correct is not the same as being good.
 
 **Impact on Strategy**:
 

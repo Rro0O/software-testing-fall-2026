@@ -18,7 +18,7 @@ Ten test types are proposed for Aula. Priorities follow the critical functions i
 
 **Priority**: Critical
 
-**Justification**: These rules are the reason the system exists. If prerequisites or grade calculations are wrong, every downstream artifact — transcript, GPA, graduation eligibility — is wrong with them.
+**Justification**: These rules are the reason the system exists. If prerequisites or grade calculations are wrong, everything built on top of them — transcript, GPA, graduation eligibility — is wrong too.
 
 ---
 
@@ -36,7 +36,7 @@ Ten test types are proposed for Aula. Priorities follow the critical functions i
 
 **Priority**: Critical
 
-**Justification**: A single authorization defect exposes the records of the whole student body at once. Unlike a functional bug, the damage cannot be undone by fixing the code, because the data has already been seen.
+**Justification**: A single authorization defect exposes the records of the whole student body at once. Unlike a normal bug, you cannot fix this one away: the data has already been seen.
 
 ---
 

@@ -7,11 +7,11 @@
 
 ## Summary
 
-This submission designs a risk-based test strategy for Aula, a hypothetical student management system for a mid-sized university. The strategy concentrates effort on the four functions whose failure is irreversible — access control, grade and transcript accuracy, enrollment concurrency and payment processing — and treats everything else in proportion. It covers ten test types, the four testing levels, the seven testing principles, and a risk matrix of ten entries with an explicit testing priority order.
+I went with a student management system because I deal with one every semester and I already know where these things hurt. Most of the effort in this strategy goes to four places: who can see what, grades coming out right, two students fighting over the last seat in a course, and payments. Everything else gets covered, just not with the same paranoia.
 
-## Why this application
+## Why this one
 
-A student management system is a system of record rather than a product people use for entertainment. Its output is a legal document, it operates under privacy obligations, and it faces one extreme load peak per term on a date fixed by the academic calendar. Those constraints make the difference between a critical defect and an inconvenient one unusually clear, which is what the analysis is built around.
+A system like this is a record, not something you use for fun. What comes out of it ends up in a document that decides whether someone graduates, and the whole school hits it in the same minute on registration day. That makes it easy to tell a critical bug from an annoying one, which is what the rest of the analysis leans on.
 
 ## Contents
 
@@ -20,13 +20,3 @@ A student management system is a system of record rather than a product people u
 3. [Part 3 — Testing levels](part3-testing-levels.md)
 4. [Part 4 — Testing principles](part4-testing-principles.md)
 5. [Part 5 — Risk analysis and prioritization](part5-risk-analysis.md)
-
-## At a glance
-
-| Part | Requirement          | Delivered     |
-| ---- | -------------------- | ------------- |
-| 1    | 300+ words           | 725 words     |
-| 2    | 8+ test types        | 10 test types |
-| 3    | 4 testing levels     | 4 levels      |
-| 4    | 7 testing principles | 7 principles  |
-| 5    | 6+ risks             | 10 risks      |

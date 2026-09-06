@@ -1,6 +1,6 @@
 # Part 3: Testing Levels Strategy
 
-The four levels are complementary, not alternatives. Each one catches a class of defect that the others structurally cannot see: a unit test cannot detect a wrong database constraint, and a system test cannot tell you which of forty functions produced a wrong number.
+The four levels are complementary, not alternatives. Each one catches bugs the others simply cannot see: a unit test will never catch a wrong database constraint, and a system test will not tell you which of forty functions produced the wrong number.
 
 ---
 
@@ -91,7 +91,7 @@ The four levels are complementary, not alternatives. Each one catches a class of
 
 ## Acceptance Testing
 
-**Scope**: Confirmation that the system solves the institution's actual problem, validated by the people who will live with it. The question shifts from "does it work as specified" to "is the specification right".
+**Scope**: Confirmation that the system solves the institution's actual problem, validated by the people who will live with it. The question stops being "does it work like we said" and becomes "did we say the right thing".
 
 **What to Test**:
 
