@@ -93,10 +93,6 @@ Reglas que seguí:
 
 Las convenciones completas están en [CONTRIBUTING.md](CONTRIBUTING.md).
 
-### Tags
-
-El estado estable de `main` en el repositorio de práctica está etiquetado como `v1.0.0`.
-
 ## Licencia
 
 MIT. Ver [LICENSE](LICENSE).
