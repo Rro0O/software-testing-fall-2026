@@ -12,18 +12,18 @@ repos:
     rev: 24.4.2
     hooks:
       - id: black
-        files: ^students/Rooo00/homework-3/
+        files: ^students/Rro0O/homework-3/
 
   - repo: https://github.com/pycqa/isort
     rev: 5.13.2
     hooks:
       - id: isort
         args: ["--profile", "black"]
-        files: ^students/Rooo00/homework-3/
+        files: ^students/Rro0O/homework-3/
 
   - repo: https://github.com/pycqa/pylint
     rev: v3.2.5
     hooks:
       - id: pylint
-        files: ^students/Rooo00/homework-3/src/
-        args: ["--rcfile=students/Rooo00/homework-3/.pylintrc"]
+        files: ^students/Rro0O/homework-3/src/
+        args: ["--rcfile=students/Rro0O/homework-3/.pylintrc"]
