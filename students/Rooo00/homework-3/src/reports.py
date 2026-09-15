@@ -1,5 +1,6 @@
-from src.models import CATEGORIES
 import statistics
+
+from src.models import CATEGORIES
 
 
 def category_breakdown(book):
@@ -50,8 +51,8 @@ class ReportBuilder:
 
     def build(self):
         lines = []
-        lines.append('Expense Report')
-        lines.append('total: %s' % self.book.total())
+        lines.append("Expense Report")
+        lines.append("total: %s" % self.book.total())
         for cat, pct in percentage_by_category(self.book).items():
-            lines.append('%s: %.2f%%' % (cat, pct))
-        return '\n'.join(lines)
+            lines.append("%s: %.2f%%" % (cat, pct))
+        return "\n".join(lines)
