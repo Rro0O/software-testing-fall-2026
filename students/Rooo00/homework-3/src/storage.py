@@ -1,21 +1,20 @@
 import csv
 import json
-import sys
 
 from src.models import Expense, ExpenseBook
 
 
 def save_to_json(book, path):
-    data = [e.ToDict() for e in book.expenses]
-    f = open(path, "w")
-    json.dump(data, f)
-    f.close()
+    """Write all expenses in the book to a JSON file."""
+    data = [e.to_dict() for e in book.expenses]
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f)
 
 
 def load_from_json(path):
-    f = open(path, "r")
-    raw = json.load(f)
-    f.close()
+    """Read expenses from a JSON file into a new ExpenseBook."""
+    with open(path, "r", encoding="utf-8") as f:
+        raw = json.load(f)
     book = ExpenseBook(expenses=[])
     for item in raw:
         e = Expense(
@@ -29,7 +28,8 @@ def load_from_json(path):
 
 
 def save_to_csv(book, path):
-    with open(path, "w", newline="") as f:
+    """Write all expenses in the book to a CSV file."""
+    with open(path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["amount", "category", "description", "date"])
         for e in book.expenses:
@@ -37,8 +37,9 @@ def save_to_csv(book, path):
 
 
 def load_from_csv(path):
+    """Read expenses from a CSV file into a new ExpenseBook."""
     book = ExpenseBook(expenses=[])
-    with open(path) as f:
+    with open(path, encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
             e = Expense(
@@ -48,8 +49,6 @@ def load_from_csv(path):
     return book
 
 
-def PrintSummary(book):
-    print(
-        "Total expenses: this report was generated automatically and contains a lot of information that is definitely more than one hundred characters long",
-        book.total(),
-    )
+def print_summary(book):
+    """Print the running total of the given expense book."""
+    print(f"Total expenses: {book.total()}")
