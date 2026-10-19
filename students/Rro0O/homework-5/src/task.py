@@ -37,6 +37,7 @@ class Task:
     """A unit of work with validation and status lifecycle."""
 
     def __init__(self, title, description="", priority=TaskPriority.LOW, due_date=None):
+        """Init."""
         self.validate_title(title)
         if due_date is not None:
             self.validate_due_date(due_date)

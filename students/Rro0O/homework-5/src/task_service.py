@@ -1,6 +1,6 @@
 """Business logic orchestrating the repository and notifications."""
 
-# pylint: disable=too-many-arguments,too-many-positional-arguments
+# pylint: disable=import-error,too-many-arguments,too-many-positional-arguments
 
 import logging
 
@@ -16,6 +16,7 @@ class TaskService:
     """Create, update, search and archive tasks."""
 
     def __init__(self, repository, notification_service):
+        """Init."""
         self.repository = repository
         self.notification_service = notification_service
 
@@ -35,12 +36,14 @@ class TaskService:
             LOGGER.warning("SMS notification failed: %s", error)
 
     def _get_task(self, task_id):
+        """Get task."""
         task = self.repository.find_by_id(task_id)
         if not task:
             raise ValueError(f"Task {task_id} not found")
         return task
 
     def _ensure_unique_title(self, title, current=None):
+        """Ensure unique title."""
         existing = self.repository.find_by_title(title)
         if existing and existing is not current:
             raise ValueError(f"Task with title '{title}' already exists")
@@ -111,7 +114,9 @@ class TaskService:
         return overdue
 
     # -- search ----------------------------------------------------------
-    def search_tasks(self, status=None, priority=None, due_from=None, due_to=None, title_query=None):
+    def search_tasks(
+        self, status=None, priority=None, due_from=None, due_to=None, title_query=None
+    ):
         """Filter tasks; all given filters are combined with AND."""
         results = []
         for task in self.repository.find_all():

@@ -5,6 +5,7 @@ class TaskRepository:
     """Persistence operations; concrete storage is out of scope."""
 
     def __init__(self, database=None):
+        """Init."""
         self.database = database
 
     def save(self, task):

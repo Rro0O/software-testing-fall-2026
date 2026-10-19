@@ -1,5 +1,7 @@
 """Shared fixtures: mocked dependencies and time helpers."""
 
+# pylint: disable=import-error,redefined-outer-name,unused-argument,too-many-arguments,too-many-positional-arguments
+
 from datetime import datetime, timedelta
 from unittest.mock import Mock
 
