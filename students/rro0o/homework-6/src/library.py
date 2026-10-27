@@ -32,6 +32,10 @@ class Library:
 
     def borrow_book(self, member_id, isbn):
         """Lend a book to a member."""
+        if isbn not in self.books:
+            raise LibraryError("Unknown book")
+        if member_id not in self.members:
+            raise LibraryError("Unknown member")
         book = self.books[isbn]
         member = self.members[member_id]
         book.borrow()
