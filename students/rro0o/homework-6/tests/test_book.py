@@ -4,6 +4,7 @@
 import pytest
 
 from src.book import Book
+from src.errors import LibraryError
 
 
 def test_book_can_be_created_with_isbn_title_and_author():
@@ -59,3 +60,9 @@ def test_borrow_decreases_available_copies():
     book = Book("1234567890", "Test Book", "Author", copies=2)
     book.borrow()
     assert book.available_copies == 1
+
+
+def test_borrow_without_copies_raises_error():
+    book = Book("1234567890", "Test Book", "Author", copies=0)
+    with pytest.raises(LibraryError):
+        book.borrow()
