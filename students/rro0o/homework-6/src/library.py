@@ -51,7 +51,7 @@ class Library:
         book.borrow()
         member.add_borrowed_book(isbn)
         self.loans[(member_id, isbn)] = self._clock()
-        self.history.append(HistoryRecord(member_id, isbn, "borrow", self._clock()))
+        self._log_event(member_id, isbn, "borrow")
 
     def return_book(self, member_id, isbn):
         """Take a book back from a member."""
@@ -61,7 +61,7 @@ class Library:
         fee = self.late_fee(member_id, isbn)
         del self.loans[(member_id, isbn)]
         book.return_copy()
-        self.history.append(HistoryRecord(member_id, isbn, "return", self._clock()))
+        self._log_event(member_id, isbn, "return")
         self._notify_next_in_queue(isbn)
         return fee
 
@@ -135,3 +135,7 @@ class Library:
     def member_history(self, member_id):
         """Return every borrow and return made by a member."""
         return [record for record in self.history if record.member_id == member_id]
+
+    def _log_event(self, member_id, isbn, action):
+        """Append an event to the history using today's date."""
+        self.history.append(HistoryRecord(member_id, isbn, action, self._clock()))
