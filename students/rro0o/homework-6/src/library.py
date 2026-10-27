@@ -49,8 +49,12 @@ class Library:
     def return_book(self, member_id, isbn):
         """Take a book back from a member."""
         member = self._require_member(member_id)
+        book = self._require_book(isbn)
         member.return_book(isbn)
-        self._require_book(isbn).return_copy()
+        fee = self.late_fee(member_id, isbn)
+        del self.loans[(member_id, isbn)]
+        book.return_copy()
+        return fee
 
     def _require_book(self, isbn):
         """Return the book or raise if it is not in the catalog."""
