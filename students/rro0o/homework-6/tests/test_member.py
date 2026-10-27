@@ -23,3 +23,9 @@ def test_blank_name_is_rejected(name):
 
 def test_new_member_can_borrow():
     assert Member("m1", "Ana").can_borrow() is True
+
+
+def test_add_borrowed_book_records_isbn():
+    member = Member("m1", "Ana")
+    member.add_borrowed_book("1234567890")
+    assert member.borrowed_books == ["1234567890"]
