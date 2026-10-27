@@ -1,5 +1,7 @@
 """Book model for the library."""
 
+from src.errors import LibraryError
+
 
 class Book:
     """A book in the catalog."""
@@ -23,4 +25,6 @@ class Book:
 
     def borrow(self):
         """Take one copy off the shelf."""
+        if not self.is_available():
+            raise LibraryError("No copies available")
         self.available_copies -= 1
