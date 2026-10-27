@@ -56,3 +56,8 @@ class Library:
         if member_id not in self.members:
             raise LibraryError("Unknown member")
         return self.members[member_id]
+
+    def search_by_title(self, title):
+        """Return the books whose title contains the text."""
+        text = title.lower()
+        return [book for book in self.books.values() if text in book.title.lower()]
