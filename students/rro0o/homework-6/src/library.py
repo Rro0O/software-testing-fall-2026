@@ -59,14 +59,17 @@ class Library:
 
     def search_by_title(self, title):
         """Return the books whose title contains the text."""
-        text = title.lower()
-        return [book for book in self.books.values() if text in book.title.lower()]
+        return self._search("title", title)
 
     def search_by_author(self, author):
         """Return the books whose author contains the text."""
-        text = author.lower()
-        return [book for book in self.books.values() if text in book.author.lower()]
+        return self._search("author", author)
 
     def get_available_books(self):
         """Return the books that have at least one free copy."""
         return [book for book in self.books.values() if book.is_available()]
+
+    def _search(self, field, text):
+        """Return the books whose field contains the text, ignoring case."""
+        text = text.lower()
+        return [book for book in self.books.values() if text in getattr(book, field).lower()]
