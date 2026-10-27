@@ -12,3 +12,12 @@ def test_borrow_is_recorded_in_the_member_history():
     library = make_library(clock=FakeClock(date(2026, 1, 1)))
     library.borrow_book("m1", ISBN)
     assert library.member_history("m1") == [HistoryRecord("m1", ISBN, "borrow", date(2026, 1, 1))]
+
+
+def test_return_is_recorded_after_the_borrow():
+    clock = FakeClock()
+    library = make_library(clock=clock)
+    library.borrow_book("m1", ISBN)
+    clock.advance(2)
+    library.return_book("m1", ISBN)
+    assert [record.action for record in library.member_history("m1")] == ["borrow", "return"]
