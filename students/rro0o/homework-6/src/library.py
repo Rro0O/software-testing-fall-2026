@@ -29,3 +29,10 @@ class Library:
     def find_member(self, member_id):
         """Return the member with this id."""
         return self.members[member_id]
+
+    def borrow_book(self, member_id, isbn):
+        """Lend a book to a member."""
+        book = self.books[isbn]
+        member = self.members[member_id]
+        book.borrow()
+        member.add_borrowed_book(isbn)
