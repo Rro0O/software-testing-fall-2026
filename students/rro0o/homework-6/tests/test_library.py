@@ -61,3 +61,11 @@ def test_borrow_with_unknown_book_raises_error():
     library = make_library()
     with pytest.raises(LibraryError):
         library.borrow_book("m1", "0000000000")
+
+
+def test_borrow_over_limit_does_not_consume_a_copy():
+    library = make_library()
+    library.register_member(Member("m2", "Bo", max_borrow_limit=0))
+    with pytest.raises(LibraryError):
+        library.borrow_book("m2", ISBN)
+    assert library.find_book(ISBN).available_copies == 1
