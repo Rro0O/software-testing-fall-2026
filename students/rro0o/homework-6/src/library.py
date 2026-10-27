@@ -66,3 +66,7 @@ class Library:
         """Return the books whose author contains the text."""
         text = author.lower()
         return [book for book in self.books.values() if text in book.author.lower()]
+
+    def get_available_books(self):
+        """Return the books that have at least one free copy."""
+        return [book for book in self.books.values() if book.is_available()]
