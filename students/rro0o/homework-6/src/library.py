@@ -146,3 +146,10 @@ class Library:
         if not counts:
             return None
         return counts.most_common(1)[0][0]
+
+    def history_report(self, member_id):
+        """Return a text report of a member's borrows and returns."""
+        lines = [f"History for {self._require_member(member_id).name}"]
+        for record in self.member_history(member_id):
+            lines.append(f"{record.date.isoformat()} {record.action} {record.isbn}")
+        return "\n".join(lines)
