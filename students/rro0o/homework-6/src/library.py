@@ -61,6 +61,7 @@ class Library:
         fee = self.late_fee(member_id, isbn)
         del self.loans[(member_id, isbn)]
         book.return_copy()
+        self.history.append(HistoryRecord(member_id, isbn, "return", self._clock()))
         self._notify_next_in_queue(isbn)
         return fee
 
