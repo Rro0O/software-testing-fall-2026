@@ -21,3 +21,9 @@ def test_reserving_a_borrowed_book_adds_member_to_queue():
     library = make_busy_library()
     library.reserve_book("m2", ISBN)
     assert library.reservation_queue(ISBN) == ["m2"]
+
+
+def test_reserving_an_available_book_raises_error():
+    library = make_library()
+    with pytest.raises(LibraryError):
+        library.reserve_book("m1", ISBN)
