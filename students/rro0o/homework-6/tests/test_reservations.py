@@ -41,3 +41,25 @@ def test_member_cannot_reserve_the_same_book_twice():
     library.reserve_book("m2", ISBN)
     with pytest.raises(LibraryError):
         library.reserve_book("m2", ISBN)
+
+
+def test_return_notifies_the_first_member_in_line():
+    library = make_busy_library()
+    library.reserve_book("m2", ISBN)
+    library.reserve_book("m3", ISBN)
+    library.return_book("m1", ISBN)
+    assert library.notifications == [("m2", ISBN)]
+
+
+def test_notified_member_leaves_the_queue():
+    library = make_busy_library()
+    library.reserve_book("m2", ISBN)
+    library.reserve_book("m3", ISBN)
+    library.return_book("m1", ISBN)
+    assert library.reservation_queue(ISBN) == ["m3"]
+
+
+def test_return_without_reservations_sends_no_notification():
+    library = make_busy_library()
+    library.return_book("m1", ISBN)
+    assert library.notifications == []
