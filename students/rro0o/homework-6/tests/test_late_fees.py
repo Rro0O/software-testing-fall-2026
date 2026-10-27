@@ -30,3 +30,15 @@ def test_student_pays_one_dollar_per_overdue_day():
     library.borrow_book("m1", ISBN)
     clock.advance(17)
     assert library.late_fee("m1", ISBN) == 3
+
+
+@pytest.mark.parametrize("category,fee", [
+    (MemberCategory.FACULTY, 1.5),
+    (MemberCategory.PUBLIC, 4.5),
+])
+def test_late_fee_depends_on_member_category(category, fee):
+    clock = FakeClock()
+    library = make_library(clock=clock, category=category)
+    library.borrow_book("m1", ISBN)
+    clock.advance(17)
+    assert library.late_fee("m1", ISBN) == fee
