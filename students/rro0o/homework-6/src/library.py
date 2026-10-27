@@ -1,5 +1,7 @@
 """Library catalog and borrowing operations."""
 
+from src.errors import LibraryError
+
 
 class Library:
     """Manages the catalog, the members and the loans."""
@@ -10,6 +12,8 @@ class Library:
 
     def add_book(self, book):
         """Add a book to the catalog."""
+        if book.isbn in self.books:
+            raise LibraryError("Book already in the catalog")
         self.books[book.isbn] = book
 
     def find_book(self, isbn):
