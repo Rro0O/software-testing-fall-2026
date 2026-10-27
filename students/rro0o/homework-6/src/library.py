@@ -107,6 +107,8 @@ class Library:
     def reserve_book(self, member_id, isbn):
         """Queue a member for a book that has no free copies."""
         self._require_member(member_id)
+        if self._require_book(isbn).is_available():
+            raise LibraryError("Book is available, borrow it instead")
         self.reservations.setdefault(isbn, []).append(member_id)
 
     def reservation_queue(self, isbn):
