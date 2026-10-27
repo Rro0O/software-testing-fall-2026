@@ -27,3 +27,17 @@ def test_reserving_an_available_book_raises_error():
     library = make_library()
     with pytest.raises(LibraryError):
         library.reserve_book("m1", ISBN)
+
+
+def test_queue_keeps_first_come_first_served_order():
+    library = make_busy_library()
+    library.reserve_book("m3", ISBN)
+    library.reserve_book("m2", ISBN)
+    assert library.reservation_queue(ISBN) == ["m3", "m2"]
+
+
+def test_member_cannot_reserve_the_same_book_twice():
+    library = make_busy_library()
+    library.reserve_book("m2", ISBN)
+    with pytest.raises(LibraryError):
+        library.reserve_book("m2", ISBN)
