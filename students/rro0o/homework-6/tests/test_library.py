@@ -49,3 +49,15 @@ def test_borrow_book_records_the_loan_on_the_member():
     library = make_library()
     library.borrow_book("m1", ISBN)
     assert library.find_member("m1").borrowed_books == [ISBN]
+
+
+def test_borrow_with_unknown_member_raises_error():
+    library = make_library()
+    with pytest.raises(LibraryError):
+        library.borrow_book("nobody", ISBN)
+
+
+def test_borrow_with_unknown_book_raises_error():
+    library = make_library()
+    with pytest.raises(LibraryError):
+        library.borrow_book("m1", "0000000000")
