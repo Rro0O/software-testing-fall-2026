@@ -82,3 +82,12 @@ def test_member_is_a_student_by_default():
 def test_explicit_limit_overrides_the_category_limit():
     member = Member("m1", "Ana", max_borrow_limit=1, category=MemberCategory.FACULTY)
     assert member.max_borrow_limit == 1
+
+
+@pytest.mark.parametrize("category,rate", [
+    (MemberCategory.STUDENT, 1.0),
+    (MemberCategory.FACULTY, 0.5),
+    (MemberCategory.PUBLIC, 1.5),
+])
+def test_category_has_a_daily_late_fee_rate(category, rate):
+    assert category.late_fee_rate == rate
