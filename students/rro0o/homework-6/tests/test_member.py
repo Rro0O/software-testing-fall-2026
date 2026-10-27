@@ -5,6 +5,7 @@ import pytest
 
 from src.errors import LibraryError
 from src.member import Member
+from src.member_category import MemberCategory
 
 
 def test_member_starts_with_id_name_no_books_and_default_limit():
@@ -63,3 +64,21 @@ def test_returning_unborrowed_book_raises_error():
     member = Member("m1", "Ana")
     with pytest.raises(LibraryError):
         member.return_book("1234567890")
+
+
+@pytest.mark.parametrize("category,limit", [
+    (MemberCategory.STUDENT, 3),
+    (MemberCategory.FACULTY, 5),
+    (MemberCategory.PUBLIC, 2),
+])
+def test_category_sets_the_borrow_limit(category, limit):
+    assert Member("m1", "Ana", category=category).max_borrow_limit == limit
+
+
+def test_member_is_a_student_by_default():
+    assert Member("m1", "Ana").category is MemberCategory.STUDENT
+
+
+def test_explicit_limit_overrides_the_category_limit():
+    member = Member("m1", "Ana", max_borrow_limit=1, category=MemberCategory.FACULTY)
+    assert member.max_borrow_limit == 1
