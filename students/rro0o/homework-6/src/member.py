@@ -25,3 +25,7 @@ class Member:
         if isbn in self.borrowed_books:
             raise LibraryError("Book already borrowed")
         self.borrowed_books.append(isbn)
+
+    def return_book(self, isbn):
+        """Remove a book from the member's borrowed list."""
+        self.borrowed_books.remove(isbn)
