@@ -84,3 +84,7 @@ class Library:
     def due_date(self, member_id, isbn):
         """Return the date the loan has to be returned by."""
         return self.loans[(member_id, isbn)] + timedelta(days=LOAN_DAYS)
+
+    def late_fee(self, member_id, isbn):
+        """Return the fee owed for a borrowed book."""
+        return 0
