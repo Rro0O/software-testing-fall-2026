@@ -69,3 +69,17 @@ def test_borrow_over_limit_does_not_consume_a_copy():
     with pytest.raises(LibraryError):
         library.borrow_book("m2", ISBN)
     assert library.find_book(ISBN).available_copies == 1
+
+
+def test_return_book_gives_the_copy_back():
+    library = make_library()
+    library.borrow_book("m1", ISBN)
+    library.return_book("m1", ISBN)
+    assert library.find_book(ISBN).available_copies == 1
+
+
+def test_return_book_clears_the_loan_on_the_member():
+    library = make_library()
+    library.borrow_book("m1", ISBN)
+    library.return_book("m1", ISBN)
+    assert library.find_member("m1").borrowed_books == []
