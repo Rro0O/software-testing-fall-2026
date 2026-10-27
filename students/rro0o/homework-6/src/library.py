@@ -15,6 +15,7 @@ class Library:
         self.members = {}
         self.loans = {}
         self._clock = clock
+        self.reservations = {}
 
     def add_book(self, book):
         """Add a book to the catalog."""
@@ -102,3 +103,12 @@ class Library:
     def _days_overdue(self, member_id, isbn):
         """Return how many days past the due date a loan is, never negative."""
         return max((self._clock() - self.due_date(member_id, isbn)).days, 0)
+
+    def reserve_book(self, member_id, isbn):
+        """Queue a member for a book that has no free copies."""
+        self._require_member(member_id)
+        self.reservations.setdefault(isbn, []).append(member_id)
+
+    def reservation_queue(self, isbn):
+        """Return the member ids waiting for a book, first in line first."""
+        return list(self.reservations.get(isbn, []))
