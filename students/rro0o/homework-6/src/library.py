@@ -45,6 +45,8 @@ class Library:
 
     def return_book(self, member_id, isbn):
         """Take a book back from a member."""
+        if member_id not in self.members:
+            raise LibraryError("Unknown member")
         member = self.members[member_id]
         member.return_book(isbn)
         self.books[isbn].return_copy()
