@@ -56,9 +56,7 @@ class Library:
         fee = self.late_fee(member_id, isbn)
         del self.loans[(member_id, isbn)]
         book.return_copy()
-        queue = self.reservations.get(isbn)
-        if queue:
-            self.notifications.append((queue.pop(0), isbn))
+        self._notify_next_in_queue(isbn)
         return fee
 
     def _require_book(self, isbn):
@@ -121,3 +119,9 @@ class Library:
     def reservation_queue(self, isbn):
         """Return the member ids waiting for a book, first in line first."""
         return list(self.reservations.get(isbn, []))
+
+    def _notify_next_in_queue(self, isbn):
+        """Notify and dequeue the member waiting longest for a book."""
+        queue = self.reservations.get(isbn)
+        if queue:
+            self.notifications.append((queue.pop(0), isbn))
