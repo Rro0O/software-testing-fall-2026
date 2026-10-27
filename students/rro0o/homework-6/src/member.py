@@ -1,5 +1,7 @@
 """Library member model."""
 
+from src.errors import LibraryError
+
 
 class Member:
     """A registered library member."""
@@ -18,4 +20,6 @@ class Member:
 
     def add_borrowed_book(self, isbn):
         """Record that the member borrowed the book with this ISBN."""
+        if not self.can_borrow():
+            raise LibraryError("Borrow limit reached")
         self.borrowed_books.append(isbn)
