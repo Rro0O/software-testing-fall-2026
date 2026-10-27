@@ -115,3 +115,9 @@ def test_search_by_author_matches_part_of_author_ignoring_case():
 def test_search_by_author_returns_empty_list_without_matches():
     library = make_library()
     assert library.search_by_author("fowler") == []
+
+
+def test_get_available_books_skips_books_without_copies():
+    library = make_library()
+    library.add_book(Book("0987654321", "Refactoring", "Fowler", copies=0))
+    assert library.get_available_books() == [library.find_book(ISBN)]
