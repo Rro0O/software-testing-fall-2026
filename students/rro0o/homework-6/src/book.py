@@ -28,3 +28,7 @@ class Book:
         if not self.is_available():
             raise LibraryError("No copies available")
         self.available_copies -= 1
+
+    def return_copy(self):
+        """Put one copy back on the shelf."""
+        self.available_copies += 1
