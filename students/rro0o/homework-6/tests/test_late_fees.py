@@ -42,3 +42,17 @@ def test_late_fee_depends_on_member_category(category, fee):
     library.borrow_book("m1", ISBN)
     clock.advance(17)
     assert library.late_fee("m1", ISBN) == fee
+
+
+def test_total_late_fees_sums_every_borrowed_book():
+    clock = FakeClock()
+    library = make_library(clock=clock)
+    library.add_book(Book("0987654321", "Refactoring", "Fowler"))
+    library.borrow_book("m1", ISBN)
+    library.borrow_book("m1", "0987654321")
+    clock.advance(16)
+    assert library.total_late_fees("m1") == 4
+
+
+def test_total_late_fees_is_zero_without_loans():
+    assert make_library().total_late_fees("m1") == 0
