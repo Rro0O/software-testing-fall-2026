@@ -61,3 +61,8 @@ class Library:
         """Return the books whose title contains the text."""
         text = title.lower()
         return [book for book in self.books.values() if text in book.title.lower()]
+
+    def search_by_author(self, author):
+        """Return the books whose author contains the text."""
+        text = author.lower()
+        return [book for book in self.books.values() if text in book.author.lower()]
