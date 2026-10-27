@@ -30,3 +30,10 @@ def test_registered_member_can_be_found_by_id():
     member = Member("m1", "Ana")
     library.register_member(member)
     assert library.find_member("m1") is member
+
+
+def test_registering_same_member_twice_raises_error():
+    library = Library()
+    library.register_member(Member("m1", "Ana"))
+    with pytest.raises(LibraryError):
+        library.register_member(Member("m1", "Bo"))
