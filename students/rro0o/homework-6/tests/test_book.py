@@ -53,3 +53,9 @@ def test_blank_title_is_rejected(title):
 def test_negative_copies_are_rejected():
     with pytest.raises(ValueError):
         Book("1234567890", "Test Book", "Author", copies=-1)
+
+
+def test_borrow_decreases_available_copies():
+    book = Book("1234567890", "Test Book", "Author", copies=2)
+    book.borrow()
+    assert book.available_copies == 1
