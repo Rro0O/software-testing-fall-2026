@@ -48,3 +48,8 @@ def test_isbn_with_thirteen_digits_is_accepted():
 def test_blank_title_is_rejected(title):
     with pytest.raises(ValueError):
         Book("1234567890", title, "Author")
+
+
+def test_negative_copies_are_rejected():
+    with pytest.raises(ValueError):
+        Book("1234567890", "Test Book", "Author", copies=-1)
