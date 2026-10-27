@@ -19,3 +19,11 @@ class Library:
     def find_book(self, isbn):
         """Return the book with this ISBN."""
         return self.books[isbn]
+
+    def register_member(self, member):
+        """Register a new member."""
+        self.members[member.member_id] = member
+
+    def find_member(self, member_id):
+        """Return the member with this id."""
+        return self.members[member_id]
