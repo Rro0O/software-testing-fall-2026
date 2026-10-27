@@ -105,3 +105,13 @@ def test_search_by_title_matches_part_of_title_ignoring_case():
 def test_search_by_title_returns_empty_list_without_matches():
     library = make_library()
     assert library.search_by_title("python") == []
+
+
+def test_search_by_author_matches_part_of_author_ignoring_case():
+    library = make_library()
+    assert library.search_by_author("MARTIN") == [library.find_book(ISBN)]
+
+
+def test_search_by_author_returns_empty_list_without_matches():
+    library = make_library()
+    assert library.search_by_author("fowler") == []
