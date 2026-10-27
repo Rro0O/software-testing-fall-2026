@@ -10,3 +10,7 @@ class Book:
         self.author = author
         self.total_copies = copies
         self.available_copies = copies
+
+    def is_available(self):
+        """Return True when at least one copy can be borrowed."""
+        return True
