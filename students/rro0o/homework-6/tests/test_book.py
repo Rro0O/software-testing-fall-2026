@@ -66,3 +66,10 @@ def test_borrow_without_copies_raises_error():
     book = Book("1234567890", "Test Book", "Author", copies=0)
     with pytest.raises(LibraryError):
         book.borrow()
+
+
+def test_return_copy_increases_available_copies():
+    book = Book("1234567890", "Test Book", "Author", copies=2)
+    book.borrow()
+    book.return_copy()
+    assert book.available_copies == 2
