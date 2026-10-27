@@ -1,14 +1,20 @@
 """Library catalog and borrowing operations."""
 
+from datetime import date, timedelta
+
 from src.errors import LibraryError
+
+LOAN_DAYS = 14
 
 
 class Library:
     """Manages the catalog, the members and the loans."""
 
-    def __init__(self):
+    def __init__(self, clock=date.today):
         self.books = {}
         self.members = {}
+        self.loans = {}
+        self._clock = clock
 
     def add_book(self, book):
         """Add a book to the catalog."""
@@ -38,6 +44,7 @@ class Library:
             raise LibraryError("Member reached the borrow limit")
         book.borrow()
         member.add_borrowed_book(isbn)
+        self.loans[(member_id, isbn)] = self._clock()
 
     def return_book(self, member_id, isbn):
         """Take a book back from a member."""
@@ -73,3 +80,7 @@ class Library:
         """Return the books whose field contains the text, ignoring case."""
         text = text.lower()
         return [book for book in self.books.values() if text in getattr(book, field).lower()]
+
+    def due_date(self, member_id, isbn):
+        """Return the date the loan has to be returned by."""
+        return self.loans[(member_id, isbn)] + timedelta(days=LOAN_DAYS)
