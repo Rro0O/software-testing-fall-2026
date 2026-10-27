@@ -16,6 +16,7 @@ class Library:
         self.loans = {}
         self._clock = clock
         self.reservations = {}
+        self.notifications = []
 
     def add_book(self, book):
         """Add a book to the catalog."""
@@ -55,6 +56,9 @@ class Library:
         fee = self.late_fee(member_id, isbn)
         del self.loans[(member_id, isbn)]
         book.return_copy()
+        queue = self.reservations.get(isbn)
+        if queue:
+            self.notifications.append((queue.pop(0), isbn))
         return fee
 
     def _require_book(self, isbn):
