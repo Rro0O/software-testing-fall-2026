@@ -90,3 +90,8 @@ class Library:
         overdue_days = (self._clock() - self.due_date(member_id, isbn)).days
         rate = self._require_member(member_id).category.late_fee_rate
         return max(overdue_days, 0) * rate
+
+    def total_late_fees(self, member_id):
+        """Return the fees owed for all books a member holds."""
+        member = self._require_member(member_id)
+        return sum(self.late_fee(member_id, isbn) for isbn in member.borrowed_books)
