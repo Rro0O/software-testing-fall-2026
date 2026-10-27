@@ -4,13 +4,12 @@ from enum import Enum
 
 
 class MemberCategory(Enum):
-    """Member types, valued by how many books they may borrow."""
+    """Member types, valued by (borrow limit, daily late fee)."""
 
-    STUDENT = 3
-    FACULTY = 5
-    PUBLIC = 2
+    STUDENT = (3, 1.0)
+    FACULTY = (5, 0.5)
+    PUBLIC = (2, 1.5)
 
-    @property
-    def borrow_limit(self):
-        """Return how many books this category may hold at once."""
-        return self.value
+    def __init__(self, borrow_limit, late_fee_rate):
+        self.borrow_limit = borrow_limit
+        self.late_fee_rate = late_fee_rate
