@@ -36,3 +36,13 @@ def test_most_borrowed_book_is_the_one_with_most_borrows():
     library.return_book("m1", ISBN)
     library.borrow_book("m1", ISBN)
     assert library.most_borrowed_book() == ISBN
+
+
+def test_history_report_lists_each_event():
+    clock = FakeClock(date(2026, 1, 1))
+    library = make_library(clock=clock)
+    library.borrow_book("m1", ISBN)
+    clock.advance(3)
+    library.return_book("m1", ISBN)
+    expected = "History for Ana\n2026-01-01 borrow 1234567890\n2026-01-04 return 1234567890"
+    assert library.history_report("m1") == expected
