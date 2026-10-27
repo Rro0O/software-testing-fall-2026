@@ -42,3 +42,9 @@ def test_isbn_with_letters_is_rejected():
 
 def test_isbn_with_thirteen_digits_is_accepted():
     assert Book("1234567890123", "Test Book", "Author").isbn == "1234567890123"
+
+
+@pytest.mark.parametrize("title", ["", "   "])
+def test_blank_title_is_rejected(title):
+    with pytest.raises(ValueError):
+        Book("1234567890", title, "Author")
