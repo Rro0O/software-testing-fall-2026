@@ -29,3 +29,9 @@ def test_add_borrowed_book_records_isbn():
     member = Member("m1", "Ana")
     member.add_borrowed_book("1234567890")
     assert member.borrowed_books == ["1234567890"]
+
+
+def test_member_at_limit_cannot_borrow():
+    member = Member("m1", "Ana", max_borrow_limit=1)
+    member.add_borrowed_book("1234567890")
+    assert member.can_borrow() is False
