@@ -56,3 +56,17 @@ def test_total_late_fees_sums_every_borrowed_book():
 
 def test_total_late_fees_is_zero_without_loans():
     assert make_library().total_late_fees("m1") == 0
+
+
+def test_returning_an_overdue_book_returns_the_fee():
+    clock = FakeClock()
+    library = make_library(clock=clock)
+    library.borrow_book("m1", ISBN)
+    clock.advance(17)
+    assert library.return_book("m1", ISBN) == 3
+
+
+def test_returning_on_time_costs_nothing():
+    library = make_library(clock=FakeClock())
+    library.borrow_book("m1", ISBN)
+    assert library.return_book("m1", ISBN) == 0
