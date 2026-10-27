@@ -20,3 +20,7 @@ class Book:
     def is_available(self):
         """Return True when at least one copy can be borrowed."""
         return self.available_copies > 0
+
+    def borrow(self):
+        """Take one copy off the shelf."""
+        self.available_copies -= 1
