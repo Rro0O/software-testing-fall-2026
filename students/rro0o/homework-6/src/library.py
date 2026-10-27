@@ -1,10 +1,13 @@
 """Library catalog and borrowing operations."""
 
+from collections import namedtuple
 from datetime import date, timedelta
 
 from src.errors import LibraryError
 
 LOAN_DAYS = 14
+
+HistoryRecord = namedtuple("HistoryRecord", "member_id isbn action date")
 
 
 class Library:
@@ -16,6 +19,7 @@ class Library:
         self.loans = {}
         self._clock = clock
         self.reservations = {}
+        self.history = []
         self.notifications = []
 
     def add_book(self, book):
@@ -47,6 +51,7 @@ class Library:
         book.borrow()
         member.add_borrowed_book(isbn)
         self.loans[(member_id, isbn)] = self._clock()
+        self.history.append(HistoryRecord(member_id, isbn, "borrow", self._clock()))
 
     def return_book(self, member_id, isbn):
         """Take a book back from a member."""
@@ -125,3 +130,7 @@ class Library:
         queue = self.reservations.get(isbn)
         if queue:
             self.notifications.append((queue.pop(0), isbn))
+
+    def member_history(self, member_id):
+        """Return every borrow and return made by a member."""
+        return [record for record in self.history if record.member_id == member_id]
