@@ -1,6 +1,8 @@
 """Tests for the Book class."""
 # pylint: disable=missing-function-docstring
 
+import pytest
+
 from src.book import Book
 
 
@@ -26,3 +28,8 @@ def test_book_is_available_when_copies_exist():
 def test_book_is_not_available_when_no_copies():
     book = Book("1234567890", "Test Book", "Author", copies=0)
     assert book.is_available() is False
+
+
+def test_isbn_with_nine_digits_is_rejected():
+    with pytest.raises(ValueError):
+        Book("123456789", "Test Book", "Author")
