@@ -109,7 +109,10 @@ class Library:
         self._require_member(member_id)
         if self._require_book(isbn).is_available():
             raise LibraryError("Book is available, borrow it instead")
-        self.reservations.setdefault(isbn, []).append(member_id)
+        queue = self.reservations.setdefault(isbn, [])
+        if member_id in queue:
+            raise LibraryError("Member already reserved this book")
+        queue.append(member_id)
 
     def reservation_queue(self, isbn):
         """Return the member ids waiting for a book, first in line first."""
