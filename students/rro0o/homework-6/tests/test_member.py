@@ -50,3 +50,10 @@ def test_borrowing_same_book_twice_raises_error():
     member.add_borrowed_book("1234567890")
     with pytest.raises(LibraryError):
         member.add_borrowed_book("1234567890")
+
+
+def test_return_book_removes_isbn():
+    member = Member("m1", "Ana")
+    member.add_borrowed_book("1234567890")
+    member.return_book("1234567890")
+    assert member.borrowed_books == []
