@@ -28,4 +28,6 @@ class Member:
 
     def return_book(self, isbn):
         """Remove a book from the member's borrowed list."""
+        if isbn not in self.borrowed_books:
+            raise LibraryError("Book was not borrowed")
         self.borrowed_books.remove(isbn)
