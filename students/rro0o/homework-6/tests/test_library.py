@@ -95,3 +95,13 @@ def test_return_of_book_not_borrowed_raises_error():
     library = make_library()
     with pytest.raises(LibraryError):
         library.return_book("m1", ISBN)
+
+
+def test_search_by_title_matches_part_of_title_ignoring_case():
+    library = make_library()
+    assert library.search_by_title("clean") == [library.find_book(ISBN)]
+
+
+def test_search_by_title_returns_empty_list_without_matches():
+    library = make_library()
+    assert library.search_by_title("python") == []
