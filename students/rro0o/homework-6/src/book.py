@@ -5,7 +5,7 @@ class Book:
     """A book in the catalog."""
 
     def __init__(self, isbn, title, author, copies=1):
-        if len(isbn) not in (10, 13):
+        if not isbn.isdigit() or len(isbn) not in (10, 13):
             raise ValueError("ISBN must have 10 or 13 digits")
         self.isbn = isbn
         self.title = title
