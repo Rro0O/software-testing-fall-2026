@@ -1,6 +1,6 @@
 """Library catalog and borrowing operations."""
 
-from collections import namedtuple
+from collections import Counter, namedtuple
 from datetime import date, timedelta
 
 from src.errors import LibraryError
@@ -139,3 +139,10 @@ class Library:
     def _log_event(self, member_id, isbn, action):
         """Append an event to the history using today's date."""
         self.history.append(HistoryRecord(member_id, isbn, action, self._clock()))
+
+    def most_borrowed_book(self):
+        """Return the ISBN borrowed most often, or None without history."""
+        counts = Counter(record.isbn for record in self.history if record.action == "borrow")
+        if not counts:
+            return None
+        return counts.most_common(1)[0][0]
