@@ -19,3 +19,7 @@ def test_member_accepts_custom_borrow_limit():
 def test_blank_name_is_rejected(name):
     with pytest.raises(ValueError):
         Member("m1", name)
+
+
+def test_new_member_can_borrow():
+    assert Member("m1", "Ana").can_borrow() is True
