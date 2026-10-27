@@ -12,6 +12,8 @@ class Book:
         self.isbn = isbn
         self.title = title
         self.author = author
+        if copies < 0:
+            raise ValueError("Copies cannot be negative")
         self.total_copies = copies
         self.available_copies = copies
 
