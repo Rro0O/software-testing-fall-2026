@@ -3,6 +3,7 @@
 
 import pytest
 
+from src.errors import LibraryError
 from src.member import Member
 
 
@@ -35,3 +36,10 @@ def test_member_at_limit_cannot_borrow():
     member = Member("m1", "Ana", max_borrow_limit=1)
     member.add_borrowed_book("1234567890")
     assert member.can_borrow() is False
+
+
+def test_add_borrowed_book_beyond_limit_raises_error():
+    member = Member("m1", "Ana", max_borrow_limit=1)
+    member.add_borrowed_book("1234567890")
+    with pytest.raises(LibraryError):
+        member.add_borrowed_book("0987654321")
