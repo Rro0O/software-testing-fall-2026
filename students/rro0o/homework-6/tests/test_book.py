@@ -33,3 +33,12 @@ def test_book_is_not_available_when_no_copies():
 def test_isbn_with_nine_digits_is_rejected():
     with pytest.raises(ValueError):
         Book("123456789", "Test Book", "Author")
+
+
+def test_isbn_with_letters_is_rejected():
+    with pytest.raises(ValueError):
+        Book("12345abcde", "Test Book", "Author")
+
+
+def test_isbn_with_thirteen_digits_is_accepted():
+    assert Book("1234567890123", "Test Book", "Author").isbn == "1234567890123"
