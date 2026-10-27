@@ -22,6 +22,8 @@ class Library:
 
     def register_member(self, member):
         """Register a new member."""
+        if member.member_id in self.members:
+            raise LibraryError("Member already registered")
         self.members[member.member_id] = member
 
     def find_member(self, member_id):
