@@ -83,3 +83,15 @@ def test_return_book_clears_the_loan_on_the_member():
     library.borrow_book("m1", ISBN)
     library.return_book("m1", ISBN)
     assert library.find_member("m1").borrowed_books == []
+
+
+def test_return_with_unknown_member_raises_error():
+    library = make_library()
+    with pytest.raises(LibraryError):
+        library.return_book("nobody", ISBN)
+
+
+def test_return_of_book_not_borrowed_raises_error():
+    library = make_library()
+    with pytest.raises(LibraryError):
+        library.return_book("m1", ISBN)
