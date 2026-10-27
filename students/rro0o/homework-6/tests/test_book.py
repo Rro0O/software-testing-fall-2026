@@ -73,3 +73,9 @@ def test_return_copy_increases_available_copies():
     book.borrow()
     book.return_copy()
     assert book.available_copies == 2
+
+
+def test_return_copy_beyond_total_raises_error():
+    book = Book("1234567890", "Test Book", "Author", copies=1)
+    with pytest.raises(LibraryError):
+        book.return_copy()
